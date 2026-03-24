@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Integrated Technical Placement Readiness System</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f6f9;
+}
+
+/* Navbar */
+
+.navbar{
+background:#343a40;
+padding:15px 40px;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.navbar h2{
+margin:0;
+}
+
+/* Hero Section */
+
+.hero{
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+height:90vh;
+background:linear-gradient(to right,#4e73df,#1cc88a);
+color:white;
+padding:20px;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:18px;
+width:60%;
+margin:auto;
+line-height:1.6;
+}
+
+.start-btn{
+display:inline-block;
+margin-top:25px;
+padding:12px 25px;
+background:white;
+color:#4e73df;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+.start-btn:hover{
+background:#4e73df;
+color:white;
+transform:scale(1.05);
+}
+
+
+/* Features */
+
+.features{
+padding:60px 40px;
+text-align:center;
+}
+
+.features h2{
+margin-bottom:40px;
+color:#333;
+}
+
+.feature-box{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.card{
+background:white;
+width:250px;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card h3{
+color:#4e73df;
+}
+
+/* Footer */
+
+.footer{
+background:#343a40;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+<h2>Welcome!</h2>
+</div>
+
+
+<!-- Hero Section -->
+
+<div class="hero">
+
+<div>
+
+<h1>Integrated Technical Placement Readiness System</h1>
+
+<p>
+A centralized platform designed to help students prepare for technical
+placements by combining aptitude practice, technical learning,
+resume building, and career guidance in one place.
+</p>
+
+<!-- Redirects to Login Page -->
+ 
+<a href="{{ url_for('login_page') }}" class="start-btn">Get Started</a>
+
+</div>
+
+</div>
+
+
+<!-- Features Section -->
+
+<div class="features">
+
+<h2>Key Features</h2>
+
+<div class="feature-box">
+
+<div class="card">
+<h3>📊 Progress Tracking</h3>
+<p>Monitor your preparation and analyze strengths and weaknesses.</p>
+</div>
+
+<div class="card">
+<h3>🧠 Aptitude Practice</h3>
+<p>Practice quantitative, logical, and verbal questions for placement tests.</p>
+</div>
+
+<div class="card">
+<h3>📄 Resume Guidance</h3>
+<p>Learn how to create professional resumes that attract recruiters.</p>
+</div>
+
+<div class="card">
+<h3>🎯 Career Guidance</h3>
+<p>Get structured roadmaps and tips for successful placements.</p>
+</div>
+
+</div>
+
+</div>
+<head>
+    <title>Student View</title>
+</head>
+
+
+
+<!-- Footer -->
+
+<div class="footer">
+<p>© 2026 Integrated Technical Placement Readiness System</p>
+</div>
+
+</body>
+</html>

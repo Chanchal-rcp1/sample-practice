@@ -1,0 +1,25 @@
+<h2>{{ section }} Materials</h2>
+
+{% for c in data %}
+
+<div style="background:white;padding:20px;margin:20px;border-radius:10px">
+
+<h3>{{ c[2] }}</h3>
+
+<p>{{ c[3] }}</p>
+
+{% if c[4] %}
+<a href="/static/uploads/{{ c[4] }}">📄 Download PDF</a>
+{% endif %}
+
+<br>
+
+{% if c[5] %}
+<a href="{{ c[5] }}">🎥 Watch Video</a>
+{% endif %}
+
+<p>{{ c[6] }}</p>
+
+</div>
+
+{% endfor %}

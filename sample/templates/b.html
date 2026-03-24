@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f4f6f9;
+}
+
+.header{
+background:#343a40;
+color:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+}
+
+.container{
+padding:40px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+margin-bottom:30px;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+margin-top:15px;
+padding:10px 15px;
+border:none;
+background:#4e73df;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:left;
+}
+
+.delete{
+background:#e74a3b;
+padding:6px 10px;
+color:white;
+text-decoration:none;
+border-radius:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h2>Admin Content Manager</h2>
+<a href="/logout" style="color:white;">Logout</a>
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h3>Add New Content</h3>
+
+<form action="/add_content" method="POST" enctype="multipart/form-data">
+
+<label>Section</label>
+<select name="section">
+<option>Technical</option>
+<option>Aptitude</option>
+<option>Interview</option>
+<option>Resume</option>
+<option>Online Profile</option>
+<option>Placement</option>
+</select>
+
+<label>Title</label>
+<input type="text" name="title" required>
+
+<label>Description</label>
+<textarea name="description"></textarea>
+
+<label>Upload PDF</label>
+<input type="file" name="pdf">
+
+<label>YouTube Link</label>
+<input type="text" name="youtube">
+
+<label>Text Notes</label>
+<textarea name="text"></textarea>
+
+<button type="submit">Add Content</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h3>Existing Content</h3>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Section</th>
+<th>Title</th>
+<th>PDF</th>
+<th>Action</th>
+</tr>
+
+{% for c in contents %}
+
+<tr>
+
+<td>{{ c[0] }}</td>
+<td>{{ c[1] }}</td>
+<td>{{ c[2] }}</td>
+
+<td>
+{% if c[4] %}
+<a href="/static/uploads/{{ c[4] }}">View PDF</a>
+{% endif %}
+</td>
+
+<td>
+<a class="delete" href="/delete_content/{{ c[0] }}">Delete</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+</head>
+
+<body style="margin:0; font-family:Arial; background:linear-gradient(to right,#4e73df,#1cc88a); height:100vh; display:flex; justify-content:center; align-items:center;">
+
+<div style="background:white; padding:40px; width:360px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+
+    <h2 style="text-align:center; margin-bottom:25px; color:#343a40;">Create Account</h2>
+
+    <form action="/register" method="POST">
+
+        <!-- Full Name -->
+        <label style="font-weight:bold;">Full Name</label>
+        <input type="text" name="fullname" placeholder="Enter your full name" required
+        style="width:100%; padding:12px; margin:8px 0 18px 0; border-radius:8px; border:1px solid #ccc;">
+
+        <!-- Email -->
+        <label style="font-weight:bold;">Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required
+        style="width:100%; padding:12px; margin:8px 0 18px 0; border-radius:8px; border:1px solid #ccc;">
+
+        <!-- Password -->
+        <label style="font-weight:bold;">Password</label>
+        <input type="password" name="password" placeholder="Create password" required
+        style="width:100%; padding:12px; margin:8px 0 20px 0; border-radius:8px; border:1px solid #ccc;">
+
+        <button type="submit"
+        style="width:100%; padding:12px; background:#1cc88a; color:white; border:none; border-radius:8px; cursor:pointer; font-size:15px;">
+        Register
+        </button>
+
+    </form>
+
+    <p style="text-align:center; margin-top:20px; font-size:14px;">
+        Already have an account?
+        <a href="/login" style="color:#4e73df; text-decoration:none; font-weight:bold;">
+        Login
+        </a>
+    </p>
+
+</div>
+
+</body>
+</html>

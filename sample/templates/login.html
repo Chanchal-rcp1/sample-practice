@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+</head>
+
+<body style="margin:0; font-family:Arial; background:linear-gradient(to right,#4e73df,#1cc88a); display:flex; justify-content:center; align-items:center; height:100vh;">
+
+<div style="background:white; padding:40px; width:350px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+
+    <h2 style="text-align:center; margin-bottom:20px;">Login</h2>
+
+    <form action="/login" method="POST">
+
+        <!-- Email Field -->
+        <input type="email" name="email" placeholder="Email" required
+        style="width:100%; padding:12px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc;">
+
+        <!-- Password Field -->
+        <input type="password" name="password" placeholder="Password" required
+        style="width:100%; padding:12px; margin-bottom:5px; border-radius:8px; border:1px solid #ccc;">
+
+        <!-- Forgot Password -->
+        <div style="text-align:right; margin-bottom:15px;">
+        
+<a href="{{ url_for('forgot_password') }}" style="font-size:13px; color:#4e73df; text-decoration:none;">Forgot Password?</a>
+        </div>
+       
+       
+
+        <!-- Login Button -->
+        <button type="submit"
+        style="width:100%; padding:12px; background:#4e73df; color:white; border:none; border-radius:8px; cursor:pointer;">
+        Login
+        </button>
+
+    </form>
+
+    <!-- Register -->
+    <p style="text-align:center; margin-top:15px;">
+        New user? <a href="/register">Register</a>
+    </p>
+
+    <!-- Back to Home -->
+    <div style="text-align:center; margin-top:10px;">
+        <a href="/"
+        style="color:#555; font-size:14px; text-decoration:none;">
+        ⬅ Back to Home
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

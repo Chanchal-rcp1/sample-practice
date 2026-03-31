@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card */
+.login-card {
+    background: #ffffff;
+    width: 420px;
+    padding: 40px 35px;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* Title */
+.project-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+/* Login to Continue Button Style */
+.subtitle-btn {
+    background-color: #e9ecef;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.subtitle-btn:hover {
+    background-color: #d6d8db;
+    transform: scale(1.05);
+}
+
+/* Input Groups */
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+/* Dark Labels */
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #212529;  /* Dark text */
+}
+
+/* Input Fields */
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+}
+
+/* Faint Placeholder */
+.input-group input::placeholder {
+    color: #adb5bd;  /* Faint text */
+}
+
+/* Focus Effect */
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #4e73df;
+    box-shadow: 0 0 0 2px rgba(78, 115, 223, 0.2);
+}
+
+/* Login Button */
+.btn {
+    width: 100%;
+    padding: 11px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4e73df;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #2e59d9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(78, 115, 223, 0.3);
+}
+
+/* Register Section */
+.register-link {
+    margin-top: 18px;
+    font-size: 13px;
+}
+
+.register-link a {
+    color: #4e73df;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+    color: #2e59d9;
+}

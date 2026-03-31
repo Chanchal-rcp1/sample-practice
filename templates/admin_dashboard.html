@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Admin Dashboard</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+}
+
+/* HEADER */
+
+.header{
+padding:25px;
+font-size:28px;
+font-weight:bold;
+text-align:center;
+background:#020617;
+border-bottom:1px solid #334155;
+letter-spacing:1px;
+}
+
+/* MAIN CONTAINER */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
+}
+
+/* DASHBOARD CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-bottom:40px;
+}
+
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 35px rgba(0,0,0,0.6);
+}
+
+.card i{
+font-size:30px;
+margin-bottom:10px;
+color:#38bdf8;
+}
+
+.number{
+font-size:38px;
+font-weight:bold;
+margin-top:8px;
+}
+
+/* GRID SECTION */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+/* BOX */
+
+.box{
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+.box h3{
+margin-bottom:20px;
+color:#38bdf8;
+}
+
+/* PROGRESS BARS */
+
+.bar{
+height:18px;
+background:#334155;
+border-radius:10px;
+margin-bottom:18px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+border-radius:10px;
+}
+
+.red{
+background:#ef4444;
+width:60%;
+}
+
+.orange{
+background:#f59e0b;
+width:70%;
+}
+
+.green{
+background:#22c55e;
+width:80%;
+}
+
+/* ACTIVITY */
+
+.activity{
+display:flex;
+align-items:center;
+margin-bottom:12px;
+color:#cbd5f5;
+}
+
+.activity i{
+margin-right:10px;
+color:#38bdf8;
+}
+
+/* ACTION BUTTONS */
+
+.actions{
+margin-top:40px;
+text-align:center;
+}
+
+.btn{
+display:inline-block;
+margin:10px;
+padding:12px 24px;
+border-radius:10px;
+text-decoration:none;
+font-weight:500;
+color:white;
+transition:0.3s;
+}
+
+.add{background:#2563eb;}
+.manage{background:#16a34a;}
+.students{background:#f59e0b;}
+.logout{background:#ef4444;}
+
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 6px 20px rgba(0,0,0,0.5);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+⚙ Admin Dashboard
+</div>
+
+
+<div class="container">
+
+<!-- TOP CARDS -->
+
+<div class="cards">
+
+<div class="card">
+<i class="fas fa-user-graduate"></i>
+<h3>Total Students</h3>
+<div class="number">{{ total_students }}</div>
+</div>
+
+<div class="card">
+<i class="fas fa-book"></i>
+<h3>Total Resources</h3>
+<div class="number">{{ total_resources }}</div>
+</div>
+
+</div>
+
+
+<div class="grid">
+
+<!-- PLACEMENT INSIGHTS -->
+
+<div class="box">
+
+<h3>📊 Placement Insights</h3>
+
+<p>Beginner Students : <b>{{ beginner }}</b></p>
+<div class="bar">
+<div class="fill red"></div>
+</div>
+
+<p>Intermediate Students : <b>{{ intermediate }}</b></p>
+<div class="bar">
+<div class="fill orange"></div>
+</div>
+
+<p>Placement Ready : <b>{{ ready }}</b></p>
+<div class="bar">
+<div class="fill green"></div>
+</div>
+
+</div>
+
+
+<!-- RECENT ACTIVITY -->
+
+<div class="box">
+
+<h3>📈 Platform Activity</h3>
+
+<div class="activity">
+<i class="fas fa-user-plus"></i>
+Students registering on the platform
+</div>
+
+<div class="activity">
+<i class="fas fa-book-open"></i>
+Learning resources being accessed
+</div>
+
+<div class="activity">
+<i class="fas fa-laptop-code"></i>
+Students completing technical modules
+</div>
+
+<div class="activity">
+<i class="fas fa-chart-line"></i>
+Placement readiness improving
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="actions">
+
+<a href="/select_category" class="btn add">
+➕ Add Content
+</a>
+
+<a href="/manage_content" class="btn manage">
+📂 Manage Content
+</a>
+
+<a href="/view_students" class="btn students">
+👨‍🎓 View Students
+</a>
+
+<a href="/" class="btn logout">
+🚪 Logout
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>admin_dashboard.html

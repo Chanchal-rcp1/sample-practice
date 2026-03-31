@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+        .navbar {
+            padding: 15px 40px;
+           background: linear-gradient(90deg, #483d8b, #6a5acd);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            color: white;
+            text-decoration: none;
+            background: #e74a3b;
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            margin-right: 10px;
+            margin-top: 5px;
+            transition: 0.3s ease;
+            display: inline-block;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+            
+        }
+
+        /* ---------------- MAIN CONTAINER ---------------- */
+        .container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            opacity: 0.9;
+        }
+
+        .section-title {
+            margin-top: 50px;
+            font-size: 22px;
+            border-bottom: 2px solid white;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* ---------------- CARDS ---------------- */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 15px;
+            transition: 0.3s;
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: #f8f9fc;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: #667eea;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <h2>🎓 Student Dashboard</h2>
+        <a href="/" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <h1>Integrated Placement Readiness Platform</h1>
+        <p>Build Skills. Prepare Smart. Get Placed 🚀</p>
+
+        <!-- Skill Development -->
+        <div class="section-title">Skill Development</div>
+        <div class="cards">
+            <div class="card">
+    <h3>💻 Technical</h3>
+    <p>Learn coding, DS&A & core subjects.</p>
+   <a href="/technical" class="btn">Explore</a>
+</div>
+
+
+            <div class="card">
+    <h3>🧠 Aptitude</h3>
+    <p>Quantitative, Verbal & Logical Learning.</p>
+    <a href="{{ url_for('aptitude', section='Logical') }}" class="btn">Start</a>
+</div>
+
+            <div class="card">
+                <h3>🎤 Interview Skills</h3>
+                <p>HR & Technical interview prep.</p>
+                <a href="{{ url_for('interview_skills') }}" class="btn">Learn More</a>
+            </div>
+        </div>
+
+        <!-- Career Preparation -->
+        <div class="section-title">Career Preparation</div>
+        <div class="cards">
+            <div class="card">
+                <h3>🤖 Resume Analyzer</h3>
+                <p>Analyze and improve your resume. Also get personalized feedback & get weak areas identified.</p>
+                <a href="{{ url_for('resume_form') }}" class="btn">
+    Analyze Resume
+</a>
+            </div>
+
+            <div class="card">
+                <h3>🌐 Online Profile</h3>
+                <p>Improve LinkedIn & GitHub profile.</p>
+               <a href="{{ url_for('online_profile') }}" class="btn">
+    Online Profile
+</a>
+            </div>
+
+           <div class="card">
+    <h3>📚 Resources</h3>
+    <p>Placement preparation materials.</p>
+    <a href="{{ url_for('view_content', category='Technical') }}" class="btn">
+        View
+    </a>
+</div>
+</div>
+        <!-- Placement Tracking -->
+        <div class="section-title">Placement Tracking</div>
+        <div class="cards">
+            <div class="card">
+                <h3>🏢 Company-wise Placement</h3>
+                <p>Check company details & criteria.</p>
+                <a href="#" class="btn">Check</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Placement Content</title>
+<style>
+body{
+margin:0;
+font-family:'Segoe UI';
+background:linear-gradient(135deg,#0f172a,#1e293b);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.container{
+background:rgba(255,255,255,0.08);
+padding:40px;
+border-radius:20px;
+width:450px;
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+select,input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:none;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#3b82f6;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Add Resource</h2>
+
+<form method="POST">
+
+<!-- CATEGORY CHECK -->
+{% if 'interview' in category %}
+
+<select name="title" required>
+<option value="">Select Topic</option>
+<option value="">Select Section</option>
+<option value="hr">HR Interview</option>
+<option value="gd">GD & Communication</option>
+<option value="strategy">Interview Strategy</option>
+</select>
+<!-- ================= ONLINE PROFILE (NEW) ================= -->
+{% elif 'profile' in category %}
+
+<select name="title" required>
+<option value="">Select Topic</option>
+
+<option value="linkedin optimization">LinkedIn Optimization</option>
+<option value="github portfolio">GitHub Portfolio</option>
+<option value="personal branding">Personal Branding</option>
+<option value="resume alignment">Resume Alignment</option>
+
+</select>
+{% else %}
+
+<!-- APTITUDE SAME AS BEFORE -->
+<select name="title" required>
+<option value="">Select Topic</option>
+
+<!-- QUANT -->
+<option value="percentages">Percentages</option>
+<option value="profit & loss">Profit & Loss</option>
+<option value="time & work">Time & Work</option>
+<option value="time-speed-distance">Time Speed Distance</option>
+<option value="number system">Number System</option>
+<option value="probability">Probability</option>
+<option value="permutation & combination">Permutation & Combination</option>
+<option value="geometry">Geometry</option>
+<option value="mensuration">Mensuration</option>
+
+<!-- LOGICAL -->
+<option value="coding-decoding">Coding Decoding</option>
+<option value="blood relations">Blood Relations</option>
+<option value="syllogism">Syllogism</option>
+<option value="seating arrangements">Seating Arrangements</option>
+<option value="data sufficiency">Data Sufficiency</option>
+<option value="puzzles">Puzzles</option>
+<option value="series completion">Series Completion</option>
+<option value="analogy">Analogy</option>
+
+<!-- VERBAL -->
+<option value="reading comprehension">Reading Comprehension</option>
+<option value="synonyms">Synonyms</option>
+<option value="antonyms">Antonyms</option>
+<option value="grammar">Grammar</option>
+<option value="sentence correction">Sentence Correction</option>
+<option value="vocabulary">Vocabulary</option>
+
+</select>
+
+{% endif %}
+
+<select name="content_type" required>
+<option value="">Select Type</option>
+<option value="PDF">PDF</option>
+<option value="YouTube">YouTube</option>
+</select>
+
+<input type="text" name="content_link" placeholder="Enter link" required>
+
+<button type="submit">Add Content</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

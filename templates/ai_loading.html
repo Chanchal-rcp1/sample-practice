@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Resume Analyzer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+body{
+background: radial-gradient(circle at top,#0f172a,#020617);
+}
+
+.scan{
+animation:scan 2s linear infinite;
+}
+
+@keyframes scan{
+0%{transform:translateY(-120px);}
+100%{transform:translateY(120px);}
+}
+</style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen text-white">
+
+<div class="text-center w-full max-w-xl">
+
+<h1 class="text-3xl font-bold mb-10 text-blue-400">
+<i class="fas fa-brain mr-2"></i> AI Resume Analyzer
+</h1>
+
+<div class="relative bg-slate-900 p-10 rounded-2xl shadow-2xl border border-slate-700">
+
+<!-- Resume Box -->
+<div class="bg-slate-800 h-56 rounded-xl relative overflow-hidden flex items-center justify-center">
+
+<i class="fas fa-file-alt text-6xl text-slate-500"></i>
+
+<!-- scanning line -->
+<div class="absolute w-full h-1 bg-blue-500 opacity-80 scan"></div>
+
+</div>
+
+<p class="mt-6 text-lg font-mono text-blue-300" id="aiText">
+Initializing AI model...
+</p>
+
+<!-- Progress Bar -->
+<div class="mt-6 bg-slate-800 rounded-full h-3 overflow-hidden">
+<div id="progressBar" class="bg-blue-500 h-3 w-0 transition-all duration-500"></div>
+</div>
+
+<p class="text-sm text-slate-400 mt-2" id="percent">0% Complete</p>
+
+</div>
+
+</div>
+
+<script>
+
+let steps=[
+"Initializing AI model...",
+"Scanning resume structure...",
+"Extracting technical skills...",
+"Matching with industry requirements...",
+"Calculating placement readiness score...",
+"Generating improvement roadmap..."
+];
+
+let progress=0;
+let index=0;
+
+let interval=setInterval(()=>{
+
+progress+=10;
+
+document.getElementById("progressBar").style.width=progress+"%";
+document.getElementById("percent").innerText=progress+"% Complete";
+
+if(index<steps.length){
+document.getElementById("aiText").innerText=steps[index];
+index++;
+}
+
+if(progress>=100){
+clearInterval(interval);
+setTimeout(()=>{
+window.location.href="/show_analysis";
+},800);
+}
+
+},600);
+
+</script>
+
+</body>
+</html>

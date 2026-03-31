@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Placement Readiness Report</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+
+body{
+background:#0b1120;
+font-family:Arial;
+}
+
+.card{
+background:#1e293b;
+border-radius:15px;
+padding:25px;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+.skill{
+background:#0f766e;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+margin:4px;
+display:inline-block;
+}
+
+.weak{
+background:#7f1d1d;
+padding:8px 14px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.profile-img{
+width:120px;
+height:120px;
+border-radius:100%;
+border:4px solid #3b82f6;
+object-fit:cover;
+margin-bottom:15px;
+}
+
+</style>
+
+</head>
+
+
+<body class="text-white p-10">
+
+<div class="max-w-6xl mx-auto">
+
+<h1 class="text-3xl font-bold mb-8 text-blue-400">
+🤖 AI Placement Readiness Report
+</h1>
+
+
+<div class="grid grid-cols-3 gap-8">
+
+
+<!-- LEFT SIDE -->
+<div class="col-span-2 space-y-6">
+
+<!-- PROFILE CARD -->
+<div class="card text-center">
+
+<h2 class="text-xl font-bold mb-4">
+👤 Candidate Profile
+</h2>
+
+{% if photo %}
+<img src="{{ photo }}" class="w-32 h-32 rounded-full border-4 border-blue-500 mx-auto mb-4">
+{% endif %}
+
+<p><b>Name:</b> {{name}}</p>
+<p><b>Email:</b> {{email}}</p>
+<p><b>Phone:</b> {{phone}}</p>
+
+</div>
+
+
+<!-- SKILLS -->
+<div class="card">
+
+<h2 class="text-xl font-bold mb-4">
+💼 Technical Skills
+</h2>
+
+{% for skill in skills.split(',') %}
+
+<span class="skill">
+{{skill.strip()}}
+</span>
+
+{% endfor %}
+
+</div>
+
+
+<!-- WEAK AREAS -->
+<div class="card">
+
+<h2 class="text-xl font-bold mb-4">
+⚠ AI Detected Weak Areas
+</h2>
+
+{% for area in weak_areas %}
+
+<div class="weak">
+
+{{area}}
+
+<br>
+
+<a href="https://www.youtube.com/results?search_query=learn+{{area}}" 
+target="_blank" 
+class="text-yellow-300 text-sm">
+
+Start Learning →
+
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+<!-- RIGHT SIDE -->
+<div class="space-y-6">
+
+
+<!-- SCORE -->
+<div class="card text-center">
+
+<h3 class="text-lg mb-4">
+📊 Placement Readiness Score
+</h3>
+
+<div class="text-5xl font-bold text-green-400">
+{{score}}%
+</div>
+
+<p class="text-gray-400 mt-2">
+Industry Match Level
+</p>
+
+</div>
+
+
+<!-- ROLES -->
+<div class="card">
+
+<h3 class="text-lg font-bold mb-4">
+🎯 Recommended Roles
+</h3>
+
+<ul class="space-y-2 text-gray-300">
+
+<li>Backend Developer</li>
+<li>Software Engineer</li>
+<li>Python Developer</li>
+
+</ul>
+
+</div>
+
+
+<!-- DOWNLOAD -->
+<div class="card">
+
+<h3 class="text-lg font-bold mb-4">
+📄 Resume Report
+</h3>
+
+<button onclick="window.print()" 
+class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-500 w-full">
+
+Download Resume Report
+
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</body>
+
+</html>

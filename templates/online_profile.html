@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Profile Module</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI';
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+}
+
+.header{
+text-align:center;
+padding:25px;
+font-size:34px;
+font-weight:bold;
+}
+
+.container{
+display:flex;
+padding:20px;
+gap:20px;
+}
+
+.sidebar{
+width:30%;
+}
+
+.accordion{
+background:#1e293b;
+border-radius:12px;
+margin-bottom:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.accordion:hover{
+transform:scale(1.03);
+box-shadow:0 0 15px rgba(59,130,246,0.5);
+}
+
+.accordion-header{
+padding:15px;
+font-size:18px;
+font-weight:bold;
+}
+
+.accordion-content{
+display:none;
+padding:15px;
+background:#0f172a;
+}
+
+.content{
+width:70%;
+background:#0f172a;
+border-radius:12px;
+padding:20px;
+}
+
+.right-flex{
+display:flex;
+gap:20px;
+align-items:flex-start;
+}
+
+.video-container{
+width:60%;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.video-container iframe{
+width:100%;
+height:230px;
+border-radius:12px;
+border:none;
+}
+
+.pdf-container{
+width:40%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:15px;
+padding-top:20px;
+}
+
+.pdf-btn{
+padding:15px 20px;
+background:#3b82f6;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.pdf-btn:hover{
+background:#2563eb;
+transform:scale(1.05);
+}
+
+.pdf-viewer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+z-index:999;
+}
+
+.pdf-viewer iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+.close-btn{
+position:absolute;
+top:15px;
+right:20px;
+background:red;
+padding:10px 15px;
+cursor:pointer;
+border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">🌐 ONLINE PROFILE MODULE</div>
+
+<div class="container">
+
+<div class="sidebar">
+
+<div class="accordion" onclick="openSection('linkedin', this)">
+<div class="accordion-header">🔗 LinkedIn Optimization</div>
+<div class="accordion-content"></div>
+</div>
+
+<div class="accordion" onclick="openSection('github', this)">
+<div class="accordion-header">💻 GitHub Portfolio</div>
+<div class="accordion-content"></div>
+</div>
+
+<div class="accordion" onclick="openSection('branding', this)">
+<div class="accordion-header">🎯 Personal Branding</div>
+<div class="accordion-content"></div>
+</div>
+
+<div class="accordion" onclick="openSection('resume', this)">
+<div class="accordion-header">📄 Resume Alignment</div>
+<div class="accordion-content"></div>
+</div>
+
+<div class="accordion" onclick="openSection('projects', this)">
+<div class="accordion-header">🚀 Project Showcase (Live Demos)</div>
+<div class="accordion-content"></div>
+</div>
+
+<div class="accordion" onclick="openSection('networking', this)">
+<div class="accordion-header">🤝 Strategic Networking</div>
+<div class="accordion-content"></div>
+</div>
+
+<div class="accordion" onclick="openSection('certifications', this)">
+<div class="accordion-header">🏅 Certifications & Badges</div>
+<div class="accordion-content"></div>
+</div>
+
+</div>
+
+<div class="content" id="rightContent">
+<h2>Select a topic</h2>
+</div>
+
+</div>
+
+<div class="pdf-viewer" id="pdfViewer">
+<div class="close-btn" onclick="closePDF()">Close</div>
+<iframe id="pdfFrame"></iframe>
+</div>
+
+<script>
+
+let data = {
+linkedin: { videos: [], pdf: "" },
+github: { videos: [], pdf: "" },
+branding: { videos: [], pdf: "" },
+resume: { videos: [], pdf: "" },
+projects: { videos: [], pdf: "" },
+networking: { videos: [], pdf: "" },
+certifications: { videos: [], pdf: "" }
+};
+
+// ✅ TITLE FIX
+let titles = {
+linkedin: "LinkedIn Optimization",
+github: "GitHub Portfolio",
+branding: "Personal Branding",
+resume: "Resume Alignment",
+projects: "Project Showcase (Live Demos)",
+networking: "Strategic Networking",
+certifications: "Certifications & Badges"
+};
+
+function openSection(section, element){
+
+let all = document.querySelectorAll('.accordion-content');
+all.forEach(a=>a.style.display='none');
+element.querySelector('.accordion-content').style.display='block';
+
+let content = `<h2>${titles[section]}</h2><div class="right-flex">`;
+
+content += `<div class="video-container">`;
+data[section].videos.forEach(v=>{
+  content += `<iframe src="${v}" allowfullscreen></iframe>`;
+});
+content += `</div>`;
+
+content += `
+<div class="pdf-container">
+<div class="pdf-btn" onclick="openPDF('${data[section].pdf}')">📄 Open PDF</div>
+</div>`;
+
+content += `</div>`;
+
+document.getElementById('rightContent').innerHTML = content;
+}
+
+function openPDF(link){
+document.getElementById('pdfViewer').style.display='block';
+document.getElementById('pdfFrame').src = link;
+}
+
+function closePDF(){
+document.getElementById('pdfViewer').style.display='none';
+document.getElementById('pdfFrame').src = "";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Content</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* BACKGROUND */
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+/* CARD */
+.container{
+width:420px;
+padding:35px;
+border-radius:20px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+box-shadow:0 25px 60px rgba(0,0,0,0.6);
+animation:fadeIn 0.8s ease;
+}
+
+/* TITLE */
+h2{
+text-align:center;
+margin-bottom:25px;
+font-size:28px;
+letter-spacing:1px;
+}
+
+/* INPUT GROUP */
+.input-group{
+margin-bottom:18px;
+}
+
+/* INPUT FIELDS */
+input, select{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,0.1);
+color:white;
+font-size:15px;
+outline:none;
+transition:0.3s;
+}
+
+/* FOCUS EFFECT 🔥 */
+input:focus, select:focus{
+background:rgba(255,255,255,0.2);
+box-shadow:0 0 10px #4f8cff;
+transform:scale(1.03);
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:linear-gradient(45deg,#4f8cff,#7c3aed);
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.4s;
+}
+
+/* BUTTON HOVER 🔥 */
+button:hover{
+transform:translateY(-4px) scale(1.05);
+box-shadow:0 15px 30px rgba(79,140,255,0.6);
+}
+
+/* BACK LINK */
+.back{
+display:block;
+margin-top:18px;
+text-align:center;
+color:rgba(255,255,255,0.7);
+text-decoration:none;
+transition:0.3s;
+}
+
+.back:hover{
+color:white;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>✏️ Edit Content</h2>
+
+<form method="POST">
+
+<div class="input-group">
+<input type="text" name="title" value="{{ data[2] }}" required>
+</div>
+
+<div class="input-group">
+<select name="content_type">
+<option value="PDF" {% if data[3]=='PDF' %}selected{% endif %}>📄 PDF</option>
+<option value="YouTube" {% if data[3]=='YouTube' %}selected{% endif %}>▶ YouTube</option>
+</select>
+</div>
+
+<div class="input-group">
+<input type="text" name="content_link" value="{{ data[4] }}" required>
+</div>
+
+<button type="submit">🚀 Update Content</button>
+
+</form>
+
+<a href="/manage_content" class="back">⬅ Back to Manage</a>
+
+</div>
+
+</body>
+</html>

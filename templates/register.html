@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Integrated Placement Readiness Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="login-card">
+
+        <h2 class="project-title">Integrated Placement Readiness Platform</h2>
+
+        <button class="subtitle-btn">Create Student Account</button>
+
+        <form method="POST">
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter Password" required>
+            </div>
+
+            <button type="submit" class="btn">Create Account</button>
+
+            <p class="register-link">
+                Already have an account?
+                <a href="/">Login Here</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

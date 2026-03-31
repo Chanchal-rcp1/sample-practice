@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category }} Resources</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 0;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            color: black;
+            padding: 20px;
+            margin: 20px auto;
+            width: 60%;
+            border-radius: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>{{ category }} Resources</h1>
+
+{% if contents %}
+    {% for content in contents %}
+        <div class="card">
+            <h3>{{ content[0] }}</h3>
+            <p>Type: {{ content[1] }}</p>
+            <a href="{{ content[2] }}" target="_blank">Open Resource</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <h3>No resources available.</h3>
+{% endif %}
+
+<br>
+<a href="/student_dashboard">Back</a>
+
+</body>
+</html>

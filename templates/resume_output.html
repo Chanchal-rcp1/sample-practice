@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .score-ring { transform: rotate(-90deg); transform-origin: center; }
+    </style>
+</head>
+<body class="bg-[#0b1120] text-slate-100 p-6">
+    <div class="max-w-6xl mx-auto">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="glass p-6 rounded-3xl md:col-span-2">
+                <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                    Placement Readiness Report
+                </h1>
+                <p class="text-slate-400 mt-2">Prepared for: <span class="text-white font-bold">{{ name }}</span></p>
+            </div>
+
+            <div class="glass p-6 rounded-3xl flex items-center justify-around">
+                <div class="relative w-24 h-24">
+                    <svg class="w-full h-full" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" stroke="#1e293b" stroke-width="8" fill="transparent" />
+                        <circle cx="50" cy="50" r="45" stroke="#3b82f6" stroke-width="8" fill="transparent" 
+                                stroke-dasharray="283" stroke-dashoffset="{{ 283 - (283 * score / 100) }}"
+                                class="score-ring" stroke-linecap="round" />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center font-bold text-xl">{{ score }}%</div>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-slate-500 uppercase font-bold">Industry Match</p>
+                    <p class="text-blue-400 font-black">Level: 
+                        {% if score > 70 %} Pro {% elif score > 40 %} Junior {% else %} Entry {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-rose-400 font-bold mb-6 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> Skill Gaps Identified
+                </h3>
+                <div class="space-y-4">
+                    {% for area in weak_areas %}
+                    <div class="flex items-center justify-between bg-slate-900/50 p-4 rounded-2xl border border-slate-800">
+                        <span class="font-medium">{{ area }}</span>
+                        <a href="https://www.youtube.com/results?search_query=learn+{{ area }}" target="_blank" class="text-blue-400 hover:text-blue-300">
+                            <i class="fas fa-external-link-alt"></i> Roadmap
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-3xl bg-gradient-to-br from-slate-800/50 to-blue-900/20">
+                <h3 class="text-emerald-400 font-bold mb-4">Current Strengths</h3>
+                <div class="flex flex-wrap gap-2 mb-8">
+                    {% for skill in skills.split(',') %}
+                    <span class="bg-emerald-500/10 text-emerald-400 px-4 py-1.5 rounded-full text-xs font-bold border border-emerald-500/20">
+                        {{ skill.strip() }}
+                    </span>
+                    {% endfor %}
+                </div>
+                <button onclick="window.print()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-2xl shadow-xl transition-all">
+                    <i class="fas fa-download mr-2"></i> Download Professional Report
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

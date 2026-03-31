@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Manage Content</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#141e30,#243b55);
+    color:white;
+    padding:40px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    color:black;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+}
+
+th{
+    background:#243b55;
+    color:white;
+}
+
+.edit{
+    background:orange;
+    padding:5px 10px;
+    border-radius:5px;
+    color:white;
+}
+
+.delete{
+    background:red;
+    padding:5px 10px;
+    border-radius:5px;
+    color:white;
+}
+
+a{
+    text-decoration:none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Manage Placement Content</h2>
+
+    <a href="/add_content" style="color:white;">Add New</a> |
+    <a href="/admin_dashboard" style="color:white;">Dashboard</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Link</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for content in contents %}
+        <tr>
+            <td>{{ content[0] }}</td>
+            <td>{{ content[1] }}</td>
+            <td>{{ content[2] }}</td>
+            <td>{{ content[3] }}</td>
+            <td>{{ content[4] }}</td>
+            <td>
+                <a href="/edit_content/{{ content[0] }}" class="edit">Edit</a>
+                <a href="/delete_content/{{ content[0] }}" class="delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>

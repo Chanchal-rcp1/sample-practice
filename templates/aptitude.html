@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aptitude Module</title>
+
+<style>
+body { margin:0; font-family:'Segoe UI'; background:linear-gradient(135deg,#1e293b,#0f172a); color:white;}
+.header { text-align:center; padding:30px; font-size:34px; font-weight:bold;}
+.top { display:flex; justify-content:center; gap:25px; margin-bottom:30px;}
+.top button { padding:12px 28px; border:none; border-radius:25px; cursor:pointer; font-size:15px; font-weight:600; color:#1e293b; background:white;}
+.top button.active { background:linear-gradient(45deg,#4f8cff,#7c3aed); color:white;}
+.container { display:flex; width:92%; margin:auto; gap:25px;}
+.sidebar { width:28%; padding:20px; border-radius:20px; background:rgba(255,255,255,0.05); max-height:700px; overflow-y:auto;}
+.topic { padding:14px; margin:10px 0; border-radius:15px; cursor:pointer; background:#1e293b;}
+.topic.active { background:#4f8cff;}
+.content { width:72%; padding:25px; border-radius:20px; background:rgba(255,255,255,0.05); max-height:700px; overflow-y:auto;}
+.data { display:none; margin-bottom:20px; padding:15px; background:#0f172a; border-radius:10px;}
+.video-pdf-container { display:flex; gap:20px; flex-wrap:wrap;}
+.video-wrapper { flex:2; min-width:300px; display:flex; flex-direction:column; gap:15px;}
+.pdf-wrapper { flex:1; min-width:250px; display:flex; flex-direction:column; gap:10px;}
+iframe { width:100%; border-radius:10px; border:none;}
+.youtube-frame, .pdf-frame { height:320px;}
+
+#pdf-fullscreen { position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; display:none;}
+#pdf-fullscreen iframe { width:100%; height:100%; }
+#closeBtn { position:absolute; top:10px; right:20px; padding:10px 15px; background:red; color:white; border:none; border-radius:8px; cursor:pointer;}
+.back-container{
+    position:absolute;
+    top:25px;
+    right:40px;
+}
+
+.back-btn{
+    padding:10px 22px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    background:linear-gradient(45deg,#22c55e,#16a34a);
+    color:white;
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    transform:scale(1.05);
+    background:linear-gradient(45deg,#16a34a,#15803d);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">APTITUDE MODULE</div>
+<div class="back-container">
+    <a href="/student_dashboard">
+        <button class="back-btn">⬅ Dashboard</button>
+    </a>
+</div>
+
+<div class="top">
+  <button onclick="loadSection('quant',this)">Quantitative</button>
+  <button onclick="loadSection('logical',this)">Logical</button>
+  <button onclick="loadSection('verbal',this)">Verbal</button>
+</div>
+
+<div class="container">
+
+<div class="sidebar" id="topics"></div>
+
+<div class="content">
+<h2 id="title">Select Topic</h2>
+
+
+<!-- REPLACE YOUR CONTENT-AREA PART ONLY -->
+
+<div id="content-area">
+
+{% set topics = contents | map(attribute='title') | unique | list %}
+
+{% for topic in topics %}
+<div class="data" data-topic="{{ topic|lower }}">
+
+<h3>{{ topic }}</h3>
+
+<div class="video-pdf-container">
+
+<!-- ✅ LEFT: ALL VIDEOS -->
+<div class="video-wrapper">
+
+{% for item in contents %}
+{% if item.title|lower == topic|lower and item.content_type|lower == "youtube" %}
+
+{% set link = item.content_link %}
+
+{% if "list=" in link %}
+{% set pid = link.split('list=')[1].split('&')[0] %}
+<iframe src="https://www.youtube.com/embed/videoseries?list={{ pid }}" class="youtube-frame"></iframe>
+
+{% elif "youtu.be" in link %}
+{% set vid = link.split('/')[-1].split('?')[0] %}
+<iframe src="https://www.youtube.com/embed/{{ vid }}" class="youtube-frame"></iframe>
+
+{% elif "watch?v=" in link %}
+{% set vid = link.split('watch?v=')[1].split('&')[0] %}
+<iframe src="https://www.youtube.com/embed/{{ vid }}" class="youtube-frame"></iframe>
+
+{% elif "shorts" in link %}
+{% set vid = link.split('shorts/')[1].split('?')[0] %}
+<iframe src="https://www.youtube.com/embed/{{ vid }}" class="youtube-frame"></iframe>
+
+{% elif "/live/" in link %}
+{% set vid = link.split('/live/')[1].split('?')[0] %}
+<iframe src="https://www.youtube.com/embed/{{ vid }}" class="youtube-frame"></iframe>
+
+{% endif %}
+
+{% endif %}
+{% endfor %}
+
+</div>
+
+<!-- ✅ RIGHT: ALL PDFs -->
+<div class="pdf-wrapper">
+
+{% for p in contents %}
+{% if p.title|lower == topic|lower and p.content_type|lower == "pdf" %}
+
+<iframe src="{{ p.content_link.replace('/view','/preview') }}" class="pdf-frame"></iframe>
+
+<button onclick="openPDF('{{ p.content_link }}')">Open PDF</button>
+
+{% endif %}
+{% endfor %}
+
+</div>
+
+</div>
+</div>
+{% endfor %}
+
+</div>
+
+
+
+</div>
+</div>
+
+<script>
+const data = {
+  quant: ["percentages","profit & loss","time & work","time-speed-distance","number system","probability","permutation & combination","geometry","mensuration"],
+  logical: ["coding-decoding","blood relations","syllogism","seating arrangements","data sufficiency","puzzles","series completion","analogy"],
+  verbal: ["reading comprehension","synonyms","antonyms","grammar","sentence correction","vocabulary"]
+};
+
+function loadSection(section,btn){
+  document.querySelectorAll(".top button").forEach(b=>b.classList.remove("active"))
+  btn.classList.add("active")
+
+  let topicBox=document.getElementById("topics")
+  topicBox.innerHTML=""
+
+  data[section].forEach(t=>{
+    topicBox.innerHTML += `<div class="topic" onclick="showTopic('${t}',this)">${t}</div>`
+  })
+}
+
+function showTopic(topic,el){
+  document.querySelectorAll(".topic").forEach(t=>t.classList.remove("active"))
+  el.classList.add("active")
+
+  document.getElementById("title").innerText = topic.toUpperCase()
+
+  let all=document.querySelectorAll(".data")
+  let found=false
+
+  all.forEach(item=>{
+      if(item.dataset.topic === topic.toLowerCase().trim()) {
+      item.style.display="block"
+      found=true
+    } else {
+      item.style.display="none"
+    }
+  })
+
+  if(!found){
+    document.getElementById("title").innerText = "No Content Available"
+  }
+}
+
+function openPDF(link){
+  document.getElementById("pdf-fullscreen").style.display="block"
+  document.getElementById("fullpdf").src=link.replace('/view','/preview')
+}
+
+function closePDF(){
+  document.getElementById("pdf-fullscreen").style.display="none"
+  document.getElementById("fullpdf").src=""
+}
+
+window.onload = function(){
+  loadSection("quant", document.querySelector(".top button"))
+}
+</script>
+
+<div id="pdf-fullscreen">
+<button id="closeBtn" onclick="closePDF()">Close ✖</button>
+<iframe id="fullpdf"></iframe>
+</div>
+
+</body>
+</html>

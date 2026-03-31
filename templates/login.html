@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Integrated Placement Readiness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script>
+        function autofillAdmin() {
+            var role = document.getElementById("role").value;
+            var emailField = document.getElementById("email");
+            var passwordField = document.getElementById("password");
+
+            if (role === "admin") {
+                emailField.value = "admin@123";
+                passwordField.value = "admin123";
+            } else {
+                emailField.value = "";
+                passwordField.value = "";
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <div class="login-card">
+
+    <h2 class="project-title">Integrated Placement Readiness Platform</h2>
+
+    <button class="subtitle-btn">Login to Continue</button>
+
+    <form method="POST">
+
+            <div class="input-group">
+                <label>Login As</label>
+                <select name="role" id="role" onchange="autofillAdmin()" required>
+                    <option value="">Select Role</option>
+                    <option value="student">Student</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+
+        </form>
+
+        <p class="register-link">
+            Don’t have an account?
+            <a href="/register">Create Account</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

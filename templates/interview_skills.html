@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Interview Skills Module</title>
+<div class="back-container">
+    <a href="/student_dashboard">
+        <button class="back-btn">⬅ Dashboard</button>
+    </a>
+</div>
+
+<style>
+body {
+    margin:0;
+    font-family:'Segoe UI';
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+}
+
+.header {
+    text-align:center;
+    padding:25px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.tabs {
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.tabs button {
+    padding:12px 22px;
+    margin:6px;
+    border:none;
+    border-radius:25px;
+    background:#1e293b;
+    color:white;
+    cursor:pointer;
+}
+
+.main {
+    display:flex;
+    padding:20px;
+}
+
+.sidebar {
+    width:270px;
+    background:rgba(255,255,255,0.05);
+    padding:15px;
+    border-radius:12px;
+}
+
+.sidebar button {
+    width:100%;
+    padding:13px;
+    margin-bottom:5px;
+    border:none;
+    border-radius:10px;
+    background:#334155;
+    color:white;
+    cursor:pointer;
+}
+
+.content {
+    flex:1;
+    margin-left:20px;
+    background:rgba(255,255,255,0.05);
+    padding:25px;
+    border-radius:12px;
+}
+
+.row {
+    display:flex;
+    gap:20px;
+}
+
+iframe {
+    width:100%;
+    height:260px;
+    border-radius:10px;
+}
+
+.pdf {
+    flex:1;
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+}
+
+.empty {
+    text-align:center;
+    padding:40px;
+}
+.back-container{
+    position:absolute;
+    top:25px;
+    right:40px;
+}
+
+.back-btn{
+    padding:10px 22px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    background:linear-gradient(45deg,#22c55e,#16a34a);
+    color:white;
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    transform:scale(1.05);
+    background:linear-gradient(45deg,#16a34a,#15803d);
+}
+</style>
+
+<script>
+
+// TOPICS
+const topics = {
+    hr: [
+        "Tell Me About Yourself",
+        "Strengths & Weaknesses",
+        "Why Should We Hire You",
+        "Salary & Location Questions"
+    ],
+    gd: [
+        "GD Basics & Rules",
+        "Body Language & Voice",
+        "Conflict Handling in GD",
+        "GD Topics List"
+    ],
+    strategy: [
+        "STAR Method",
+        "Virtual Interview Tips",
+        "Pre Interview Checklist",
+        "Post Interview Email"
+    ],
+
+    // ✅ NEW VERBAL SECTION
+    verbal: [
+        "Reading Comprehension",
+        "Synonyms & Antonyms",
+        "Sentence Correction",
+        "Vocabulary",
+        "Grammar"
+    ]
+};
+
+// DESCRIPTION FUNCTION
+function getDescription(title){
+    const desc = {
+
+        // HR
+        "Tell Me About Yourself": "Introduce yourself with background, skills and goals.",
+        "Strengths & Weaknesses": "Explain strengths with examples and weaknesses with improvement.",
+        "Why Should We Hire You": "Show your value and how you fit the role.",
+        "Salary & Location Questions": "Answer confidently and be flexible.",
+
+        // GD
+        "GD Basics & Rules": "Follow rules and communicate clearly.",
+        "Body Language & Voice": "Maintain confidence and good posture.",
+        "Conflict Handling in GD": "Handle disagreements calmly.",
+        "GD Topics List": "Practice common GD topics.",
+
+        // Strategy
+        "STAR Method": "Use Situation, Task, Action, Result format.",
+        "Virtual Interview Tips": "Ensure proper setup and internet.",
+        "Pre Interview Checklist": "Prepare resume and research company.",
+        "Post Interview Email": "Send thank-you email.",
+
+        // ✅ VERBAL
+        "Reading Comprehension": "Improve understanding and answering passage-based questions.",
+        "Synonyms & Antonyms": "Learn word meanings and opposites.",
+        "Sentence Correction": "Fix grammar and sentence structure.",
+        "Vocabulary": "Build strong word knowledge.",
+        "Grammar": "Understand rules of English language."
+    };
+    return desc[title] || "";
+}
+
+// SWITCH TAB
+function switchTab(section){
+
+    let sidebar = document.getElementById("sidebar");
+    let content = document.getElementById("content");
+
+    sidebar.innerHTML = "";
+    content.innerHTML = `<div class="empty">Select a topic from left 👈</div>`;
+
+    topics[section].forEach(title => {
+
+        let wrapper = document.createElement("div");
+
+        let btn = document.createElement("button");
+        btn.innerHTML = "👉 " + title;
+
+        let descDiv = document.createElement("div");
+        descDiv.style.display = "none";
+        descDiv.style.background = "#1e293b";
+        descDiv.style.padding = "10px";
+        descDiv.style.marginBottom = "10px";
+        descDiv.style.borderRadius = "8px";
+        descDiv.style.fontSize = "14px";
+
+        btn.onclick = () => {
+
+            document.querySelectorAll(".desc").forEach(d => d.style.display="none");
+
+            let desc = getDescription(title);
+
+            if(desc){
+                descDiv.innerHTML = "📘 " + desc;
+                descDiv.style.display = "block";
+            }
+
+            loadContent(section, title);
+        };
+
+        descDiv.classList.add("desc");
+
+        wrapper.appendChild(btn);
+        wrapper.appendChild(descDiv);
+
+        sidebar.appendChild(wrapper);
+    });
+}
+
+// LOAD CONTENT
+function loadContent(section, title){
+
+    fetch(`/get_interview_content/${section}`)
+    .then(res => res.json())
+    .then(data => {
+
+        let content = document.getElementById("content");
+
+        let video = "";
+        let pdf = "";
+
+        data.forEach(item => {
+            if(item.title === title){
+                if(item.content_type === "video"){
+                    video = item.content_link;
+                }
+                if(item.content_type === "pdf"){
+                    pdf = item.content_link;
+                }
+            }
+        });
+
+        content.innerHTML = `
+        <div>
+            <h2>🎯 ${title}</h2>
+
+            <div class="row">
+                <div style="flex:2;">
+                    ${video ? `<iframe src="${video}"></iframe>` : "No Video"}
+                </div>
+
+                <div class="pdf">
+                    ${pdf ? `<a href="${pdf}" target="_blank">Open PDF</a>` : "No PDF"}
+                </div>
+            </div>
+        </div>
+        `;
+    });
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="header">🚀 Interview Skills Module</div>
+
+<div class="tabs">
+    <button onclick="switchTab('hr')">HR Interview</button>
+    <button onclick="switchTab('gd')">GD & Communication</button>
+    <button onclick="switchTab('strategy')">Interview Strategy</button>
+
+    <!-- ✅ NEW BUTTON -->
+    <button onclick="switchTab('verbal')">Verbal Ability</button>
+</div>
+
+<div class="main">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="content" id="content">
+        <div class="empty">Select a section above to begin 👆</div>
+    </div>
+</div>
+
+</body>
+</html>
